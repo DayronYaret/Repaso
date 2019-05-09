@@ -2,6 +2,8 @@ package es.ulpgc.dayron.repaso.principal;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.dayron.repaso.app.RepositoryContract;
+
 interface PrincipalContract {
 
   interface View {
@@ -27,7 +29,7 @@ interface PrincipalContract {
   interface Model {
     String fetchData();
 
-    void increase();
+    void increase(RepositoryContract.OnIncreasedCallback callback);
 
     int getCount();
   }

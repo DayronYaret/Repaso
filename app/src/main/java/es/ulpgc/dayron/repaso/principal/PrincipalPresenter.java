@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.dayron.repaso.app.RepositoryContract;
+
 public class PrincipalPresenter implements PrincipalContract.Presenter {
 
   public static String TAG = PrincipalPresenter.class.getSimpleName();
@@ -58,10 +60,14 @@ public class PrincipalPresenter implements PrincipalContract.Presenter {
 
   @Override
   public void increase() {
-    model.increase();
-    viewModel.count = model.getCount();
-    viewModel.data = Integer.toString(viewModel.count);
-    fetchData();
+    model.increase(new RepositoryContract.OnIncreasedCallback() {
+      @Override
+      public void getValueIncrease(int count) {
+        viewModel.count = count;
+        viewModel.data = Integer.toString(viewModel.count);
+        fetchData();
+      }
+    });
   }
 
   @Override

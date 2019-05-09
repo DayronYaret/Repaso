@@ -3,31 +3,32 @@ package es.ulpgc.dayron.repaso.app;
 import android.content.Context;
 
 public class Repository implements RepositoryContract {
-public static Repository INSTANCE;
-private Context context;
-private int count=0;
-private int click=0;
+  public static Repository INSTANCE;
+  private Context context;
+  private int count = 0;
+  private int click = 0;
 
-public static RepositoryContract getInstance(Context context){
-  if(INSTANCE == null){
-    INSTANCE = new Repository(context);
+  public static RepositoryContract getInstance(Context context) {
+    if (INSTANCE == null) {
+      INSTANCE = new Repository(context);
+    }
+    return INSTANCE;
   }
-  return INSTANCE;
-}
-private Repository(Context context){
-  this.context=context;
-}
+
+  private Repository(Context context) {
+    this.context = context;
+  }
 
   @Override
-  public void increase() {
-    if(count == 9) {
+  public void increase(RepositoryContract.OnIncreasedCallback callback) {
+    if (count == 9) {
       count = 0;
       click++;
-    }
-    else {
+    } else {
       count++;
       click++;
     }
+    callback.getValueIncrease(count);
   }
 
   public int getCount() {
@@ -45,8 +46,10 @@ private Repository(Context context){
   public void setClick(int click) {
     this.click = click;
   }
-  public void reset(){
-  count =0;
-  click = 0;
+
+  public void reset(RepositoryContract.OnResetCallback callback) {
+    count = 0;
+    click = 0;
+    callback.setReset();
   }
 }

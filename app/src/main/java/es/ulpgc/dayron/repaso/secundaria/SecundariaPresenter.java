@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.dayron.repaso.app.RepositoryContract;
+
 public class SecundariaPresenter implements SecundariaContract.Presenter {
 
   public static String TAG = SecundariaPresenter.class.getSimpleName();
@@ -57,7 +59,12 @@ public class SecundariaPresenter implements SecundariaContract.Presenter {
 
   }
   public void reset(){
-    model.reset();
+    model.reset(new RepositoryContract.OnResetCallback() {
+      @Override
+      public void setReset() {
+        viewModel.click = 0;
+      }
+    });
 
   }
 

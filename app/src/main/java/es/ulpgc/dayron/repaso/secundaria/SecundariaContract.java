@@ -2,6 +2,8 @@ package es.ulpgc.dayron.repaso.secundaria;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.dayron.repaso.app.RepositoryContract;
+
 interface SecundariaContract {
 
   interface View {
@@ -24,7 +26,7 @@ interface SecundariaContract {
 
   interface Model {
     String fetchData();
-    void reset();
+    void reset(RepositoryContract.OnResetCallback callback);
   }
 
   interface Router {

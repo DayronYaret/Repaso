@@ -1,10 +1,18 @@
 package es.ulpgc.dayron.repaso.app;
 
 public interface RepositoryContract {
-  void increase();
+  interface OnIncreasedCallback{
+    void getValueIncrease(int count);
+  }
+  void increase(RepositoryContract.OnIncreasedCallback callback);
+
   int getCount();
   int getClick();
   void setCount(int count);
   void setClick(int click);
-  void reset();
+
+  interface  OnResetCallback{
+    void setReset();
+  }
+  void reset(RepositoryContract.OnResetCallback callback);
 }

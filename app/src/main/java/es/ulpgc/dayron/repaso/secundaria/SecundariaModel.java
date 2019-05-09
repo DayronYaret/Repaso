@@ -25,7 +25,9 @@ public class SecundariaModel implements SecundariaContract.Model {
   }
 
   @Override
-  public void reset() {
-    repository.reset();
+  public void reset(RepositoryContract.OnResetCallback callback) {
+    repository.reset(callback);
   }
+
+
 }

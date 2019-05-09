@@ -26,10 +26,9 @@ public class PrincipalModel implements PrincipalContract.Model {
   }
 
   @Override
-  public void increase() {
-    repository.increase();
-    count = repository.getCount();
-    click = repository.getClick();
+  public void increase(RepositoryContract.OnIncreasedCallback callback) {
+    repository.increase(callback);
+
   }
 
   @Override
